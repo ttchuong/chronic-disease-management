@@ -3,9 +3,14 @@ import dynamic from "next/dynamic";
 import React from "react";
 import ChartOne from "../Charts/ChartOne";
 import ChartTwo from "../Charts/ChartTwo";
-import ChatCard from "../Chat/ChatCard";
+import AppointmentRequests from "./AppointmentRequests";
 import TableOne from "../Tables/TableOne";
 import CardDataStats from "../CardDataStats";
+import Patients from "./Patients";
+import OverviewStats from "./Stats";
+import Gender from "./Gender";
+import TodayAppointments from "./TodayAppointments";
+import PatientTable from "../Patient/PatientTable";
 
 const MapOne = dynamic(() => import("@/components/Maps/MapOne"), {
   ssr: false,
@@ -18,8 +23,17 @@ const ChartThree = dynamic(() => import("@/components/Charts/ChartThree"), {
 const ECommerce: React.FC = () => {
   return (
     <>
+      <div className="p-4">
+        <p className="text-xl font-bold text-black">Welcome, Dr. Stephen</p>
+        <p>Have a nice day at great work</p>
+      </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats title="Total views" total="$3.456K" rate="0.43%" levelUp>
+        <CardDataStats
+          title="Total appointments"
+          total="10"
+          rate="0.43%"
+          levelUp
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -38,7 +52,7 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Profit" total="$45,2K" rate="4.35%" levelUp>
+        <CardDataStats title="Total Patients" total="5" rate="4.35%" levelUp>
           <svg
             className="fill-primary dark:fill-white"
             width="20"
@@ -61,7 +75,12 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Product" total="2.450" rate="2.59%" levelUp>
+        <CardDataStats
+          title="Clinic Consulting"
+          total="50"
+          rate="2.59%"
+          levelUp
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -80,7 +99,12 @@ const ECommerce: React.FC = () => {
             />
           </svg>
         </CardDataStats>
-        <CardDataStats title="Total Users" total="3.456" rate="0.95%" levelDown>
+        <CardDataStats
+          title="Video Consulting"
+          total="100"
+          rate="0.95%"
+          levelDown
+        >
           <svg
             className="fill-primary dark:fill-white"
             width="22"
@@ -105,15 +129,23 @@ const ECommerce: React.FC = () => {
         </CardDataStats>
       </div>
 
-      <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <ChartOne />
-        <ChartTwo />
-        <ChartThree />
-        <MapOne />
-        <div className="col-span-12 xl:col-span-8">
-          <TableOne />
+      <div className="mt-4 grid grid-cols-12 gap-3 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
+        <AppointmentRequests />
+        <div className="col-span-4 grid grid-rows-2">
+          <Patients />
+          <Gender />
         </div>
-        <ChatCard />
+        <TodayAppointments />
+        <PatientTable />
+
+        {/* <ChartOne /> */}
+        {/* <ChartTwo /> */}
+        {/* <ChartThree /> */}
+        {/* <MapOne /> */}
+        {/* <div className="col-span-12 xl:col-span-8"> */}
+        {/* <TableOne /> */}
+        {/* </div> */}
+        {/* <ChatCard /> */}
       </div>
     </>
   );

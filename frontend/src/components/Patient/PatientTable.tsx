@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {PatientItem} from "@/types/PatientItem";
+import { PatientItem } from "@/types/PatientItem";
 
 //src={"/images/user/user-01.png"}
 const brandData: PatientItem[] = [
@@ -43,83 +43,85 @@ const brandData: PatientItem[] = [
 
 const PatientTable = () => {
   return (
-    <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+    <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+      <div className="mb-6 flex flex-row px-7.5">
+        <span className="text-xl font-semibold text-black dark:text-white">
+          Recent Patients
+        </span>
+      </div>
       <div className="flex flex-col">
         <div className="grid grid-cols-3 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-6">
           <div className="p-2.5 xl:p-5">
-            <h5 className="text-sm font-medium xsm:text-base">
-              Patient Name
-            </h5>
+            <h5 className="text-sm font-medium xsm:text-base">Patient Name</h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium xsm:text-base">
-              Visit Id
-            </h5>
+            <h5 className="text-sm font-medium xsm:text-base">Visit Id</h5>
           </div>
           <div className="p-2.5 text-center xl:p-5">
-            <h5 className="text-sm font-medium xsm:text-base">
-              Date
-            </h5>
+            <h5 className="text-sm font-medium xsm:text-base">Date</h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium xsm:text-base">
-              Gender
-            </h5>
+            <h5 className="text-sm font-medium xsm:text-base">Gender</h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium xsm:text-base">
-              Diseases
-            </h5>
+            <h5 className="text-sm font-medium xsm:text-base">Diseases</h5>
           </div>
           <div className="hidden p-2.5 text-center sm:block xl:p-5">
-            <h5 className="text-sm font-medium xsm:text-base">
-              Status
-            </h5>
+            <h5 className="text-sm font-medium xsm:text-base">Status</h5>
           </div>
         </div>
 
         {brandData.map((patient, key) => (
-            <div
-                className={`grid grid-cols-3 sm:grid-cols-6 ${
-                    key === brandData.length - 1
-                        ? ""
-                        : "border-b border-stroke dark:border-strokedark"
-                }`}
-                key={key}
-            >
-              <div className="flex items-center gap-3 p-2.5 xl:p-5">
-                <div className="flex-shrink-0">
-                  <Image src={patient.avatar} alt="Patient" width={48} height={48}/>
-                </div>
-                <p className="hidden text-black dark:text-white sm:block">
-                  {patient.name}
-                </p>
+          <div
+            className={`grid grid-cols-3 sm:grid-cols-6 ${
+              key === brandData.length - 1
+                ? ""
+                : "border-b border-stroke dark:border-strokedark"
+            }`}
+            key={key}
+          >
+            <div className="flex items-center gap-3 p-2.5 xl:p-5">
+              <div className="flex-shrink-0">
+                <Image
+                  src={patient.avatar}
+                  alt="Patient"
+                  width={48}
+                  height={48}
+                />
               </div>
-
-              <div className="flex items-center justify-center p-2.5 xl:p-5">
-                <p className="text-black dark:text-white">{patient.visitId}</p>
-              </div>
-
-              <div className="flex items-center justify-center p-2.5 xl:p-5">
-                <p className="text-black dark:text-white">{patient.date}</p>
-              </div>
-
-              <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-                <p className="text-black dark:text-white">{patient.gender}</p>
-              </div>
-
-              <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-                <p className="text-black dark:text-white">{patient.diseases}</p>
-              </div>
-
-              <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-                <p className="text-black dark:text-white">{patient.status}</p>
-                <div className="relative">
-                  <button className="absolute -right-6 -top-2"><img className="w-5 h-5" src={"/images/icon/three-dots-vertical.svg"}/></button>
-                </div>
-              </div>
-
+              <p className="hidden text-black dark:text-white sm:block">
+                {patient.name}
+              </p>
             </div>
+
+            <div className="flex items-center justify-center p-2.5 xl:p-5">
+              <p className="text-black dark:text-white">{patient.visitId}</p>
+            </div>
+
+            <div className="flex items-center justify-center p-2.5 xl:p-5">
+              <p className="text-black dark:text-white">{patient.date}</p>
+            </div>
+
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+              <p className="text-black dark:text-white">{patient.gender}</p>
+            </div>
+
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+              <p className="text-black dark:text-white">{patient.diseases}</p>
+            </div>
+
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+              <p className="text-black dark:text-white">{patient.status}</p>
+              <div className="relative">
+                <button className="absolute -right-6 -top-2">
+                  <img
+                    className="h-5 w-5"
+                    src={"/images/icon/three-dots-vertical.svg"}
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
         ))}
       </div>
     </div>
