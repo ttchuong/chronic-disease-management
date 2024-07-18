@@ -37,6 +37,8 @@ const config: Config = {
         graydark: "#333A48",
         "gray-2": "#F7F9FC",
         "gray-3": "#FAFAFA",
+        "gray-300": "#D1D5DB",
+        "gray-500": "#6B7280",
         whiten: "#F1F5F9",
         whiter: "#F5F7FD",
         boxdark: "#24303F",
