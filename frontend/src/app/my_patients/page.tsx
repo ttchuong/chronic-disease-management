@@ -16,7 +16,6 @@ const TablesPage = () => {
   const handleSubmit = (values: any) => {
     console.log(values);
     toggleModal();
-    // TODO: Add the new appointment to the list
   };
 
   return (
