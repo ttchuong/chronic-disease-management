@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/pro-components": "^2.7.13",
+    "antd": "^5.19.2",
     "apexcharts": "^3.45.2",
     "flatpickr": "^4.6.13",
     "jsvectormap": "^1.6.0",
