@@ -113,7 +113,7 @@ const PatientTable = () => {
               <p className="text-black dark:text-white">{patient.status}</p>
               <div className="relative">
                 <button className="absolute -right-6 -top-2">
-                  <Image
+                  <img
                     className="h-5 w-5"
                     alt="three dot vertical"
                     src={"/images/icon/three-dots-vertical.svg"}
