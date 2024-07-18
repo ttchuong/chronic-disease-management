@@ -19,6 +19,6 @@ public class DoctorModel {
     private int id;
     private String name;
     private String specialization;
-    @OneToMany
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     private Set<AppointmentModel> appointments;
 }

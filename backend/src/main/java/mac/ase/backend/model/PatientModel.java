@@ -23,6 +23,6 @@ public class PatientModel {
     private String email;
     private String phone;
 
-    @OneToMany
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private Set<AppointmentModel> appointments;
 }
