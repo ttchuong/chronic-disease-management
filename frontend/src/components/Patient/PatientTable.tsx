@@ -1,5 +1,8 @@
+"use client";
 import Image from "next/image";
 import { PatientItem } from "@/types/PatientItem";
+import { useRouter } from 'next/navigation'
+
 
 const brandData: PatientItem[] = [
   {
@@ -41,6 +44,8 @@ const brandData: PatientItem[] = [
 ];
 
 const PatientTable = () => {
+  const router = useRouter()
+
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="mb-6 flex flex-row px-7.5">
@@ -72,11 +77,14 @@ const PatientTable = () => {
 
         {brandData.map((patient, key) => (
           <div
-            className={`grid grid-cols-3 sm:grid-cols-6 ${
+            className={`grid grid-cols-3 sm:grid-cols-6 cursor-pointer ${
               key === brandData.length - 1
                 ? ""
                 : "border-b border-stroke dark:border-strokedark"
             }`}
+            onClick={() => {
+              router.push('/my_patients/monitoring_plan')
+            }}
             key={key}
           >
             <div className="flex items-center gap-3 p-2.5 xl:p-5">
@@ -113,8 +121,9 @@ const PatientTable = () => {
               <p className="text-black dark:text-white">{patient.status}</p>
               <div className="relative">
                 <button className="absolute -right-6 -top-2">
-                  <img
-                    className="h-5 w-5"
+                  <Image
+                    width={20}
+                    height={20}
                     alt="three dot vertical"
                     src={"/images/icon/three-dots-vertical.svg"}
                   />
