@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { PatientItem } from "@/types/PatientItem";
 
-//src={"/images/user/user-01.png"}
 const brandData: PatientItem[] = [
   {
     avatar: "/images/user/user-01.png",
@@ -114,8 +113,9 @@ const PatientTable = () => {
               <p className="text-black dark:text-white">{patient.status}</p>
               <div className="relative">
                 <button className="absolute -right-6 -top-2">
-                  <img
+                  <Image
                     className="h-5 w-5"
+                    alt="three dot vertical"
                     src={"/images/icon/three-dots-vertical.svg"}
                   />
                 </button>
