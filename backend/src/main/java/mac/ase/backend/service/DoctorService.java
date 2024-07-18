@@ -5,10 +5,16 @@ import mac.ase.backend.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
+
+    public List<DoctorModel> findAllDoctors() {
+        return doctorRepository.findAll();
+    }
 
     public DoctorModel getDoctorById(int id) {
         return doctorRepository.findById(id).orElse(null);
