@@ -82,7 +82,7 @@ const PatientTable = () => {
                 ? ""
                 : "border-b border-stroke dark:border-strokedark"
             }`}
-            onClick={(e) => {
+            onClick={() => {
               router.push('/my_patients/monitoring_plan')
             }}
             key={key}

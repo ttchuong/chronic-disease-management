@@ -3,7 +3,7 @@ import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import DefaultLayout from "@/components/Layouts/DefaultLayout";
 import PatientTable from "@/components/Patient/PatientTable";
 import {Button, ConfigProvider, Modal} from "antd";
-import {ProForm, ProFormDateTimePicker, ProFormText, ProFormTextArea} from "@ant-design/pro-components";
+import {ProForm, ProFormText, ProFormTextArea} from "@ant-design/pro-components";
 import React from "react";
 import en_US from "antd/es/locale/en_US";
 
