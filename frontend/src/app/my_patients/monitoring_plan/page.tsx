@@ -50,7 +50,7 @@ const MonitoringPlan = () => {
                         <div className="font-bold">Clinical summary</div>
                         <p className="bg-transparent">
                             An after-visit summary that provides a patient with relevant and actionable information and
-                            instructions containing the patient name, provider's office contact information, date and
+                            instructions containing the patient name, provider&amps office contact information, date and
                             location
                             of visit, an updated medication list, updated vitals, reason(s) for visit
                         </p>
