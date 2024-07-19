@@ -4,7 +4,7 @@ const AppointmentData = [
     name: "Bogdan Krivenchenko",
     gender: "Male",
     type: "Clinic Consulting",
-    time: 1721253473000,
+    time: "14:00",
     status: "Confirmed",
   },
   {
@@ -12,7 +12,7 @@ const AppointmentData = [
     name: "Jenny Wilson",
     gender: "Female",
     type: "Video Consulting",
-    time: 1721253473000,
+    time: "14:30",
     status: "Confirmed",
   },
   {
@@ -20,7 +20,7 @@ const AppointmentData = [
     name: "Dianne Russel",
     gender: "Female",
     type: "Emergency",
-    time: 1721253473000,
+    time: "15:00",
     status: "Declined",
   },
   {
@@ -28,7 +28,7 @@ const AppointmentData = [
     name: "Annette Black",
     gender: "Female",
     type: "Clinic Consulting",
-    time: 1721253473000,
+    time: "15:30",
     status: "Confirmed",
   },
   {
@@ -36,7 +36,7 @@ const AppointmentData = [
     name: "Esther Howard",
     gender: "Male",
     type: "Video Consulting",
-    time: 1721253473000,
+    time: "16:00",
     status: "",
   },
   {
@@ -44,7 +44,7 @@ const AppointmentData = [
     name: "Jhon Doe",
     gender: "Male",
     type: "Clinic Consulting",
-    time: 1721253473000,
+    time: "16:30",
     status: "",
   },
 ];

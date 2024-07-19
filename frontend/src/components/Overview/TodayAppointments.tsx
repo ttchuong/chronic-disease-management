@@ -50,7 +50,7 @@ const TodayAppointments = () => {
                   </span>
                 </p>
               </div>
-              {renderHourMinute(chat.time)}
+              {chat.time}
             </div>
           </Link>
         ))}
