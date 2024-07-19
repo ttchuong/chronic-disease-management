@@ -44,7 +44,7 @@ public class PatientService {
     }
 
     public PatientModel findPatientByUserName(String userName) {
-        PatientModel patient = patientRepository.findPatientByUserName(userName);
+        PatientModel patient = patientRepository.findPatientByUid(userName);
         if(patient == null){
             throw new ResourceNotFoundException("No patient with userName: " + userName + " saved.");
         } else {
