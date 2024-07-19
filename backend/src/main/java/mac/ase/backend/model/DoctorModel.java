@@ -14,7 +14,6 @@ import java.util.Set;
 @Table(name = "doctor")
 @Entity
 public class DoctorModel {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
     private String name;

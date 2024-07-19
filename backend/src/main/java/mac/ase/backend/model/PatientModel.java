@@ -14,7 +14,6 @@ import java.util.Set;
 @Entity
 public class PatientModel {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int id;
     private String avatar;

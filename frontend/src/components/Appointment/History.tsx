@@ -57,17 +57,7 @@ function History() {
   };
 
   return (
-    <ConfigProvider
-      locale={en_US}
-      theme={{
-        components: {
-          Button: {
-            // blue hash color code
-            colorPrimary: "#1890ff!important",
-          },
-        },
-      }}
-    >
+    <>
       <Modal
         open={isAddingAppointment}
         onCancel={toggleAddAppointment}
@@ -122,7 +112,7 @@ function History() {
           ],
         }}
       />
-    </ConfigProvider>
+    </>
   );
 }
 
