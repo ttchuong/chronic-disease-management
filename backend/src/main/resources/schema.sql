@@ -62,6 +62,8 @@ CREATE TABLE IF NOT EXISTS `appointment` (
                                              `description` VARCHAR(255) NOT NULL,
     `type` ENUM('VIDEO', 'PHONE', 'CHAT') NOT NULL,
     `status` ENUM('PENDING', 'APPROVED', 'REJECTED') NOT NULL,
+    `appointment_begin` TIMESTAMP NOT NULL,
+    `appointment_end` TIMESTAMP NOT NULL,
     `doctor_id` INT NOT NULL,
     `patient_id` INT NOT NULL,
     FOREIGN KEY (`doctor_id`) REFERENCES `doctor`(`id`),
