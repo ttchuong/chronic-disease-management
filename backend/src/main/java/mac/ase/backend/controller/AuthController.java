@@ -5,6 +5,7 @@ import mac.ase.backend.model.JwtResponse;
 import mac.ase.backend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -44,6 +45,16 @@ public class AuthController {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
             throw new Exception("INVALID_CREDENTIALS", e);
+        }
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','SUPER_USER')")
+    @GetMapping("/ping")
+    public String test() {
+        try {
+            return "Welcome";
+        } catch (Exception e){
+            throw new RuntimeException(e);
         }
     }
 }

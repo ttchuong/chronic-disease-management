@@ -1,6 +1,5 @@
 package mac.ase.backend.service;
 
-import mac.ase.backend.model.DoctorModel;
 import mac.ase.backend.model.PatientModel;
 import mac.ase.backend.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
