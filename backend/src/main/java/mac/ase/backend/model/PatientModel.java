@@ -12,15 +12,11 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "patient")
 @Entity
-public class PatientModel {
+public class PatientModel extends Person {
 
-    @Id
-    private int id;
-    private String avatar;
-    private String gender;
-    private String name;
-    private String email;
-    private String phone;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private Set<AppointmentModel> appointments;
