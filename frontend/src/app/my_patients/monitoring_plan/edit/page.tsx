@@ -4,29 +4,39 @@ import {MonitordTracker} from "@/types/MonitordTracker";
 import {useEffect, useState} from "react";
 import flatpickr from "flatpickr";
 import Image from "next/image";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "@/store";
+import {deletePatient} from "@/store/slices/patientsSlice";
+import {ChildProps} from "postcss";
 
-const monitoredData: MonitordTracker[] = [
-  {
-    type: "Blood Pressure",
-    reportingTime: "Thirst Time @ 8:00 am",
-    reminders: "3:00 pm, 8:00 pm",
-    freqAndReview: "The only way to know if you have high blood pressure",
-  },
-  {
-    type: "Exercise",
-    reportingTime: "Daily @ 06:00-8:00 am",
-    reminders: null,
-    freqAndReview: "Your doctor will probably order and have neurological changes",
-  },
-  {
-    type: "Food",
-    reportingTime: "Thirst Time @ 8:00 am",
-    reminders: "3:00 pm, 8:00 pm",
-    freqAndReview: "Your doctor will probably order and have neurological changes",
-  },
-];
+// let monitoredData: MonitordTracker[] = [
+//   {
+//     type: "Blood Pressure",
+//     reportingTime: "Thirst Time @ 8:00 am",
+//     reminders: "3:00 pm, 8:00 pm",
+//     freqAndReview: "The only way to know if you have high blood pressure",
+//   },
+//   {
+//     type: "Exercise",
+//     reportingTime: "Daily @ 06:00-8:00 am",
+//     reminders: null,
+//     freqAndReview: "Your doctor will probably order and have neurological changes",
+//   },
+//   {
+//     type: "Food",
+//     reportingTime: "Thirst Time @ 8:00 am",
+//     reminders: "3:00 pm, 8:00 pm",
+//     freqAndReview: "Your doctor will probably order and have neurological changes",
+//   },
+// ];
 
-const EditMonitoredTrackerList = () => {
+interface EditMonitoredTrackerListProps {
+  patients: MonitordTracker[]
+}
+
+const EditMonitoredTrackerList:React.FC<EditMonitoredTrackerListProps> = ({patients}) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-4 rounded-sm bg-gray-2 dark:bg-meta-4">
@@ -51,47 +61,46 @@ const EditMonitoredTrackerList = () => {
         </div>
       </div>
 
-      {monitoredData.map((monitoredItem, key) => (
-        <div
-          className={`grid grid-cols-4 ${
-            key === monitoredData.length - 1
-              ? ""
-              : "border-b border-stroke dark:border-strokedark"
-          }`}
-          key={key}
-        >
-          <div className="flex items-center gap-3 p-2.5 xl:p-5">
-            <p className="text-black dark:text-white">
-              {monitoredItem.type}
-            </p>
-          </div>
-
-          <div className="flex flex-col p-2.5 xl:p-5">
-            <p className="text-black dark:text-white">{monitoredItem.reportingTime}</p>
-            <p className="text-black dark:text-white">{monitoredItem.reminders}</p>
-          </div>
-
-          <div className="flex items-center p-2.5 xl:p-5">
-            <p className="text-black dark:text-white">{monitoredItem.freqAndReview}</p>
-          </div>
-          <div className="flex items-center p-2.5 xl:p-5">
-            <button className="hover:text-primary">
-              <Image
-                height={20}
-                width={20}
-                src="/images/icon/delete-3.svg"
-                alt="delete"/>
-            </button>
-            <button className="hover:text-primary">
-              <Image
-                height={20}
-                width={20}
-                src="/images/icon/edit-3.svg"
-                alt="edit"/>
-            </button>
-          </div>
+      {patients.map((monitoredItem, key) => <div
+        className={`grid grid-cols-4 ${
+          key === patients.length - 1
+            ? ""
+            : "border-b border-stroke dark:border-strokedark"
+        }`}
+        key={key}
+      >
+        <div className="flex items-center gap-3 p-2.5 xl:p-5">
+          <p className="text-black dark:text-white">
+            {monitoredItem.type}
+          </p>
         </div>
-      ))}
+
+        <div className="flex flex-col p-2.5 xl:p-5">
+          <p className="text-black dark:text-white">{monitoredItem.reportingTime}</p>
+          <p className="text-black dark:text-white">{monitoredItem.reminders}</p>
+        </div>
+
+        <div className="flex items-center p-2.5 xl:p-5">
+          <p className="text-black dark:text-white">{monitoredItem.freqAndReview}</p>
+        </div>
+        <div className="flex items-center p-2.5 xl:p-5">
+          <button className="hover:text-primary">
+            <Image
+              onClick={(e) => dispatch(deletePatient({key}))}
+              height={20}
+              width={20}
+              src="/images/icon/delete-3.svg"
+              alt="delete"/>
+          </button>
+          <button className="hover:text-primary">
+            <Image
+              height={20}
+              width={20}
+              src="/images/icon/edit-3.svg"
+              alt="edit"/>
+          </button>
+        </div>
+      </div>)}
     </div>
   )
 }
@@ -128,6 +137,10 @@ const MonitoringPlanEdit = () => {
         '<svg className="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
     });
   }, [dateOfConsultation]);
+
+  const patients = useSelector(
+    (state: RootState) => state.patients
+  );
 
   return (
     <div className="flex flex-col flex-1 gap-8 text-sm">
@@ -300,7 +313,7 @@ const MonitoringPlanEdit = () => {
         </div>
       </div>
 
-      <EditMonitoredTrackerList />
+      <EditMonitoredTrackerList patients={patients}/>
 
       <div className="flex">
         <input
