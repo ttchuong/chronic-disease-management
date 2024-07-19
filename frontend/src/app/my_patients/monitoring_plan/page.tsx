@@ -1,31 +1,14 @@
 "use client";
 
-import {MonitordTracker} from "@/types/MonitordTracker";
-import {Button} from "antd";
 import Link from "next/link";
-
-const monitoredData: MonitordTracker[] = [
-    {
-        type: "Blood Pressure",
-        reportingTime: "Thirst Time @ 8:00 am",
-        reminders: "3:00 pm, 8:00 pm",
-        freqAndReview: "The only way to know if you have high blood pressure",
-    },
-    {
-        type: "Exercise",
-        reportingTime: "Daily @ 06:00-8:00 am",
-        reminders: null,
-        freqAndReview: "Your doctor will probably order and have neurological changes",
-    },
-    {
-        type: "Food",
-        reportingTime: "Thirst Time @ 8:00 am",
-        reminders: "3:00 pm, 8:00 pm",
-        freqAndReview: "Your doctor will probably order and have neurological changes",
-    },
-];
+import {RootState} from "@/store";
+import {useSelector} from "react-redux";
 
 const MonitoringPlan = () => {
+    const patients = useSelector(
+      (state: RootState) => state.patients
+    );
+
     return (
       <div className="flex flex-col gap-6">
           <div className="relative">
@@ -73,10 +56,10 @@ const MonitoringPlan = () => {
                   </div>
               </div>
 
-              {monitoredData.map((monitoredItem, key) => (
+              {patients.map((monitoredItem, key) => (
                 <div
                   className={`grid grid-cols-3 ${
-                    key === monitoredData.length - 1
+                    key === patients.length - 1
                       ? ""
                       : "border-b border-stroke dark:border-strokedark"
                   }`}
