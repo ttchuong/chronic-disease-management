@@ -6,35 +6,15 @@ import flatpickr from "flatpickr";
 import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store";
-import {deletePatient} from "@/store/slices/patientsSlice";
+import {deletePatient, updateMonitoringPlan} from "@/store/slices/patientsSlice";
 import {ChildProps} from "postcss";
-
-// let monitoredData: MonitordTracker[] = [
-//   {
-//     type: "Blood Pressure",
-//     reportingTime: "Thirst Time @ 8:00 am",
-//     reminders: "3:00 pm, 8:00 pm",
-//     freqAndReview: "The only way to know if you have high blood pressure",
-//   },
-//   {
-//     type: "Exercise",
-//     reportingTime: "Daily @ 06:00-8:00 am",
-//     reminders: null,
-//     freqAndReview: "Your doctor will probably order and have neurological changes",
-//   },
-//   {
-//     type: "Food",
-//     reportingTime: "Thirst Time @ 8:00 am",
-//     reminders: "3:00 pm, 8:00 pm",
-//     freqAndReview: "Your doctor will probably order and have neurological changes",
-//   },
-// ];
+import {useRouter} from "next/navigation";
 
 interface EditMonitoredTrackerListProps {
-  patients: MonitordTracker[]
+  monitoredTrackers: MonitordTracker[]
 }
 
-const EditMonitoredTrackerList:React.FC<EditMonitoredTrackerListProps> = ({patients}) => {
+const EditMonitoredTrackerList:React.FC<EditMonitoredTrackerListProps> = ({monitoredTrackers}) => {
   const dispatch = useDispatch();
 
   return (
@@ -61,9 +41,9 @@ const EditMonitoredTrackerList:React.FC<EditMonitoredTrackerListProps> = ({patie
         </div>
       </div>
 
-      {patients.map((monitoredItem, key) => <div
+      {monitoredTrackers.map((monitoredItem, key) => <div
         className={`grid grid-cols-4 ${
-          key === patients.length - 1
+          key === monitoredTrackers.length - 1
             ? ""
             : "border-b border-stroke dark:border-strokedark"
         }`}
@@ -105,19 +85,44 @@ const EditMonitoredTrackerList:React.FC<EditMonitoredTrackerListProps> = ({patie
   )
 }
 
-const MonitoringPlanEdit = () => {
-  const [isVisibleToPatient, setIsVisibleToPatient] = useState<boolean>(false);
-  const [healthCareProvider, setHealthcareProvider] = useState<string>();
-  const [consultationType, setConsultationType] = useState<string>();
-  const [patientName, setPatientName] = useState<string>();
-  const [location, setLocation] = useState<string>();
-  const [startTime, setStartTime] = useState<string>();
-  const [dateOfConsultation, setDateOfConsultation] = useState<Date>();
-  const [reasonForConsultation, setReasonForConsultation] = useState<string>()
-  const [reviewNote, setReviewNote] = useState<string>()
+const MonitoringPlanEdit = ({ params }: { params: { id: string } }) => {
+  const patientIndex = parseInt(params.id);
+  const patient = useSelector(
+    (state: RootState) => state.patientData.patients[patientIndex]
+  );
+  const trackers = patient.monitoringTrackers
+  const plan = patient.monitoringPlan ||
+    {
+      isVisibleToPatient: false,
+      healthcareProvider: "",
+      consultationType: "",
+      patientName: "",
+      location: "",
+      startTime: "",
+      dateOfConsultation: new Date(),
+      reasonForConsultation: "",
+      reviewNote: "",
+    };
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const [isVisibleToPatient, setIsVisibleToPatient] = useState<boolean>(plan.isVisibleToPatient);
+  const [healthCareProvider, setHealthcareProvider] = useState<string>(plan.healthcareProvider);
+  const [consultationType, setConsultationType] = useState<string>(plan.consultationType);
+  const [patientName, setPatientName] = useState<string>(plan.patientName);
+  const [location, setLocation] = useState<string>(plan.location);
+  const [startTime, setStartTime] = useState<string>(plan.startTime);
+  const [dateOfConsultation, setDateOfConsultation] = useState<Date>(plan.dateOfConsultation);
+  const [reasonForConsultation, setReasonForConsultation] = useState<string>(plan.reasonForConsultation)
+  const [reviewNote, setReviewNote] = useState<string>(plan.reviewNote)
 
   const submit = () => {
-    console.log(healthCareProvider, dateOfConsultation, patientName, isVisibleToPatient);
+    dispatch(updateMonitoringPlan({
+      patientIndex: patientIndex,
+      monitoringPlan: {isVisibleToPatient, healthCareProvider, consultationType, patientName, location, startTime, dateOfConsultation, reasonForConsultation, reviewNote}
+    }));
+    router.push(`/my_patients/${patientIndex}/monitoring_plan`);
+    // router.push(`/my_patients`);
   }
 
   useEffect(() => {
@@ -137,10 +142,6 @@ const MonitoringPlanEdit = () => {
         '<svg className="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M1.4 10.8L0 9.4l4-4-4-4L1.4 0l5.4 5.4z" /></svg>',
     });
   }, [dateOfConsultation]);
-
-  const patients = useSelector(
-    (state: RootState) => state.patients
-  );
 
   return (
     <div className="flex flex-col flex-1 gap-8 text-sm">
@@ -313,7 +314,7 @@ const MonitoringPlanEdit = () => {
         </div>
       </div>
 
-      <EditMonitoredTrackerList patients={patients}/>
+      <EditMonitoredTrackerList monitoredTrackers={trackers}/>
 
       <div className="flex">
         <input

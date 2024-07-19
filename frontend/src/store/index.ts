@@ -5,7 +5,7 @@ import patientSlice from "./slices/patientsSlice";
 export const store = configureStore({
   reducer: {
     auth: authSlice,
-    patients: patientSlice,
+    patientData: patientSlice,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

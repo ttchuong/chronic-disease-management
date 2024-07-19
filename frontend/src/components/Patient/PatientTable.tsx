@@ -1,8 +1,8 @@
 "use client";
-import Image from "next/image";
-import { PatientItem } from "@/types/PatientItem";
+import {RootState} from "@/store";
+import {useSelector} from "react-redux";
 import { useRouter } from 'next/navigation'
-
+import Image from "next/image";
 
 const brandData: PatientItem[] = [
   {
@@ -46,6 +46,10 @@ const brandData: PatientItem[] = [
 const PatientTable = () => {
   const router = useRouter()
 
+  const patients = useSelector(
+    (state: RootState) => state.patientData.patients
+  );
+
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="mb-6 flex flex-row px-7.5">
@@ -75,15 +79,18 @@ const PatientTable = () => {
           </div>
         </div>
 
-        {brandData.map((patient, key) => (
+        {patients.map((patient, key) => (
           <div
-            className={`grid grid-cols-3 sm:grid-cols-6 cursor-pointer ${
-              key === brandData.length - 1
+            className={`grid grid-cols-3 sm:grid-cols-6
+            ${patient.monitoringPlan ? "cursor-pointer" : ""}  
+            ${
+              key === patients.length - 1
                 ? ""
                 : "border-b border-stroke dark:border-strokedark"
             }`}
             onClick={() => {
-              router.push('/my_patients/monitoring_plan')
+              if (patient.monitoringPlan)
+                router.push(`/my_patients/${key}/monitoring_plan`)
             }}
             key={key}
           >
