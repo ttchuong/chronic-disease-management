@@ -6,17 +6,19 @@ import flatpickr from "flatpickr";
 import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/store";
-import {deletePatient, updateMonitoringPlan} from "@/store/slices/patientsSlice";
-import {ChildProps} from "postcss";
+import {deleteMonitoringTracker, deletePatient, updateMonitoringPlan} from "@/store/slices/patientsSlice";
 import {useRouter} from "next/navigation";
 
 interface EditMonitoredTrackerListProps {
   monitoredTrackers: MonitordTracker[]
+  params: {
+    id: string
+  }
 }
 
-const EditMonitoredTrackerList:React.FC<EditMonitoredTrackerListProps> = ({monitoredTrackers}) => {
+const EditMonitoredTrackerList:React.FC<EditMonitoredTrackerListProps> = ({monitoredTrackers, params}) => {
   const dispatch = useDispatch();
-
+  const patientIndex = parseInt(params.id);
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-4 rounded-sm bg-gray-2 dark:bg-meta-4">
@@ -66,7 +68,7 @@ const EditMonitoredTrackerList:React.FC<EditMonitoredTrackerListProps> = ({monit
         <div className="flex items-center p-2.5 xl:p-5">
           <button className="hover:text-primary">
             <Image
-              onClick={(e) => dispatch(deletePatient({key}))}
+              onClick={(e) => dispatch(deleteMonitoringTracker({patientIndex: patientIndex, monitoringTrackerIndex: key}))}
               height={20}
               width={20}
               src="/images/icon/delete-3.svg"
@@ -314,7 +316,7 @@ const MonitoringPlanEdit = ({ params }: { params: { id: string } }) => {
         </div>
       </div>
 
-      <EditMonitoredTrackerList monitoredTrackers={trackers}/>
+      <EditMonitoredTrackerList monitoredTrackers={trackers} params={params}/>
 
       <div className="flex">
         <input

@@ -1,47 +1,9 @@
 "use client";
+
+import Image from "next/image";
+import { useRouter } from 'next/navigation'
 import {RootState} from "@/store";
 import {useSelector} from "react-redux";
-import { useRouter } from 'next/navigation'
-import Image from "next/image";
-
-const brandData: PatientItem[] = [
-  {
-    avatar: "/images/user/user-01.png",
-    name: "Deveon Lane",
-    visitId: "OPD-2345",
-    date: "07/19/24",
-    gender: "Male",
-    diseases: "Diabetes",
-    status: "Out-Patient",
-  },
-  {
-    avatar: "/images/user/user-02.png",
-    name: "Albert Flores",
-    visitId: "IDP-2424",
-    date: "07/19/24",
-    gender: "Male",
-    diseases: "Diabetes",
-    status: "Out-Patient",
-  },
-  {
-    avatar: "/images/user/user-03.png",
-    name: "Ella Lucia",
-    visitId: "OPD-2345",
-    date: "07/19/24",
-    gender: "Male",
-    diseases: "Diabetes",
-    status: "Out-Patient",
-  },
-  {
-    avatar: "/images/user/user-02.png",
-    name: "Matthew Stone",
-    visitId: "IDP-2424",
-    date: "07/19/24",
-    gender: "Male",
-    diseases: "Diabetes",
-    status: "Out-Patient",
-  },
-];
 
 const PatientTable = () => {
   const router = useRouter()
