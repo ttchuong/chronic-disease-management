@@ -36,6 +36,7 @@ interface EditMonitoredTrackerListProps {
 
 const EditMonitoredTrackerList:React.FC<EditMonitoredTrackerListProps> = ({patients}) => {
   const dispatch = useDispatch();
+
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-4 rounded-sm bg-gray-2 dark:bg-meta-4">
