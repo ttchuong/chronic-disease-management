@@ -14,12 +14,6 @@ public interface PatientRepository extends JpaRepository<PatientModel, Integer> 
     PatientModel findPatientByUid(String uid);
 
     /**
-     * @param username - the uid of the patient
-     * @return finds a patient object with the username
-     */
-    PatientModel findPatientByUserName(String username);
-
-    /**
      * Deletes an patient with the uid
      * @param uid - the uid of the patient to delete
      */
