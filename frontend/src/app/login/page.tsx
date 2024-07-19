@@ -23,6 +23,7 @@ function Login() {
       setIsAuthenticated({
         authenticated: true,
         token: data.jwttoken,
+        username: values.username, // Extract username from form values
       }),
     );
     router.replace("/");

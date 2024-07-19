@@ -2,12 +2,17 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ClickOutside from "@/components/ClickOutside";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { setIsAuthenticated } from "@/store/slices/authSlice";
+import {RootState} from "@/store";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dispatch = useDispatch();
+
+  const username = useSelector(
+        (state: RootState) => state.auth.username,
+  )
 
   const handleLogOut = () => {
     dispatch(
@@ -27,16 +32,16 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Stephen Conley
+            {username.includes("doctor") ? "Stephen Conley" : "Jenny Willson" }
           </span>
-          <span className="block text-xs">Cardiologist</span>
+          <span className="block text-xs">{username.includes("doctor") ? "Cardiologist" : "Patient" }</span>
         </span>
 
         <span className="h-12 w-12 rounded-full">
           <Image
             width={112}
             height={112}
-            src={"/images/user/user-06.png"}
+            src={ username.includes("doctor") ? "/images/user/user-06.png": "/images/user/user-02.png" }
             style={{
               width: "auto",
               height: "auto",
