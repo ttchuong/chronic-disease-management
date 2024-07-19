@@ -1,3 +1,6 @@
+import {MonitordTracker} from "@/types/MonitordTracker";
+import {MonitoredPlan} from "@/types/MonitoredPlan";
+
 export type PatientItem = {
   avatar: string;
   name: string;
@@ -6,4 +9,6 @@ export type PatientItem = {
   gender: string;
   diseases: string;
   status: string;
+  monitoringTrackers: MonitordTracker[],
+  monitoringPlan: MonitoredPlan | null,
 };

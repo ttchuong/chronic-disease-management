@@ -1,50 +1,15 @@
 "use client";
 import Image from "next/image";
-import { PatientItem } from "@/types/PatientItem";
 import { useRouter } from 'next/navigation'
-
-
-const brandData: PatientItem[] = [
-  {
-    avatar: "/images/user/user-01.png",
-    name: "Deveon Lane",
-    visitId: "OPD-2345",
-    date: "5/7/21",
-    gender: "Male",
-    diseases: "Diabetes",
-    status: "Out-Patient",
-  },
-  {
-    avatar: "/images/user/user-02.png",
-    name: "Albert Flores",
-    visitId: "IDP-2424",
-    date: "5/7/21",
-    gender: "Male",
-    diseases: "Diabetes",
-    status: "Out-Patient",
-  },
-  {
-    avatar: "/images/user/user-03.png",
-    name: "Ella Lucia",
-    visitId: "OPD-2345",
-    date: "5/7/21",
-    gender: "Male",
-    diseases: "Diabetes",
-    status: "Out-Patient",
-  },
-  {
-    avatar: "/images/user/user-02.png",
-    name: "Matthew Stone",
-    visitId: "IDP-2424",
-    date: "5/7/21",
-    gender: "Male",
-    diseases: "Diabetes",
-    status: "Out-Patient",
-  },
-];
+import {RootState} from "@/store";
+import {useSelector} from "react-redux";
 
 const PatientTable = () => {
   const router = useRouter()
+
+  const patients = useSelector(
+    (state: RootState) => state.patientData.patients
+  );
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
@@ -75,15 +40,18 @@ const PatientTable = () => {
           </div>
         </div>
 
-        {brandData.map((patient, key) => (
+        {patients.map((patient, key) => (
           <div
-            className={`grid grid-cols-3 sm:grid-cols-6 cursor-pointer ${
-              key === brandData.length - 1
+            className={`grid grid-cols-3 sm:grid-cols-6
+            ${patient.monitoringPlan ? "cursor-pointer" : ""}  
+            ${
+              key === patients.length - 1
                 ? ""
                 : "border-b border-stroke dark:border-strokedark"
             }`}
             onClick={() => {
-              router.push('/my_patients/monitoring_plan')
+              if (patient.monitoringPlan)
+                router.push(`/my_patients/${key}/monitoring_plan`)
             }}
             key={key}
           >
