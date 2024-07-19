@@ -1,30 +1,28 @@
-import ECommerce from "@/components/Overview";
-import { Metadata } from "next";
-import DefaultLayout from "@/components/Layouts/DefaultLayout";
-import { ConfigProvider } from "antd";
-import en_US from "antd/es/locale/en_US";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Chronic Disease Management System",
-  description: "This is Next.js Home for TailAdmin Dashboard Template",
-};
+import ECommerce from "@/components/Overview";
+import DefaultLayout from "@/components/Layouts/DefaultLayout";
+import { Provider, useSelector } from "react-redux";
+import { RootState, store } from "@/store";
+import { redirect } from "next/navigation";
+
+// export const metadata: Metadata = {
+//   title: "Chronic Disease Management System",
+//   description: "This is Next.js Home for TailAdmin Dashboard Template",
+// };
 
 export default function Home() {
+  const authenticated = useSelector(
+    (state: RootState) => state.auth.authenticated,
+  );
+  console.log(authenticated);
+  if (!authenticated) {
+    // Routing to login page
+    redirect("/login");
+  }
   return (
-    <ConfigProvider
-      locale={en_US}
-      theme={{
-        components: {
-          Button: {
-            // blue hash color code
-            colorPrimary: "#1890ff!important",
-          },
-        },
-      }}
-    >
-      <DefaultLayout>
-        <ECommerce />
-      </DefaultLayout>
-    </ConfigProvider>
+    <DefaultLayout>
+      <ECommerce />
+    </DefaultLayout>
   );
 }

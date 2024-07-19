@@ -6,7 +6,7 @@ type CredType = {
 };
 
 const login = async (creds: CredType) => {
-  return await axios.post('http://localhost:8080/api/auth/login', creds)
+  return axios.post('http://localhost:8080/api/auth/login', creds)
 }
 
 

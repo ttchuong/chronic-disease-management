@@ -1,11 +1,13 @@
 package mac.ase.backend.model;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
 
+@Data
 public class CustomUserDetails implements UserDetails {
 
     private String username;
@@ -16,6 +18,7 @@ public class CustomUserDetails implements UserDetails {
         this.username = username;
         this.password = password;
         this.role = role;
+
     }
 
     @Override

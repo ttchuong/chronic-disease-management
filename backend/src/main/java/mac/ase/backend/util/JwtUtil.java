@@ -18,14 +18,6 @@ public class JwtUtil {
 
     private String secret = "secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret";
 
-    private String generateSafeToken() {
-        SecureRandom random = new SecureRandom();
-        byte[] bytes = new byte[36]; // 36 bytes * 8 = 288 bits, a little bit more than
-        // the 256 required bits
-        random.nextBytes(bytes);
-        var encoder = Base64.getUrlEncoder().withoutPadding();
-        return encoder.encodeToString(bytes);
-    }
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);

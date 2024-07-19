@@ -4,6 +4,9 @@ import { CredType, login } from "@/api/auth";
 import { Button, Checkbox, Form, Input } from "antd";
 import { FormProps } from "antd/lib";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setIsAuthenticated } from "@/store/slices/authSlice";
+import { useRouter } from "next/navigation";
 
 type FieldType = {
   username?: string;
@@ -11,8 +14,17 @@ type FieldType = {
   remember?: string;
 };
 function Login() {
-  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    login(values);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const onFinish: FormProps<FieldType>["onFinish"] = async (values) => {
+    const { data } = await login(values);
+    dispatch(
+      setIsAuthenticated({
+        authenticated: true,
+        token: data.jwttoken,
+      }),
+    );
+    router.replace("/");
   };
 
   const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (

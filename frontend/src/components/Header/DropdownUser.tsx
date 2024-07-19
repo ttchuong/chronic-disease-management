@@ -2,9 +2,21 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ClickOutside from "@/components/ClickOutside";
+import { useDispatch } from "react-redux";
+import { setIsAuthenticated } from "@/store/slices/authSlice";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleLogOut = () => {
+    dispatch(
+      setIsAuthenticated({
+        authenticated: false,
+        token: "",
+      }),
+    );
+  };
 
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
@@ -128,7 +140,10 @@ const DropdownUser = () => {
               </Link>
             </li>
           </ul>
-          <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+          <button
+            className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+            onClick={handleLogOut}
+          >
             <svg
               className="fill-current"
               width="22"
