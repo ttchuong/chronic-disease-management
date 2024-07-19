@@ -3,6 +3,6 @@ export type Appointment = {
   name: string;
   gender: string;
   type: string;
-  time: number;
+  time: string;
   status: string;
 };
